@@ -63,6 +63,42 @@
       gtag("config", "G-R7E7EM3JQB");
     </script>
     <script>
+      FundraiseUp.on("donationComplete", function (details) {
+        var ga_amount = details.donation.amount || 0;
+        var ga_recurring = details.donation.recurring || "Not Provided";
+        var ga_currency = details.donation.currency || "USD";
+        var ga_fullName =
+          details.supporter.firstName + " " + details.supporter.lastName || "";
+        var ga_email = details.supporter.email || "Not Provided";
+        var ga_companies = [details.supporter.employer] || ["Not Provided"];
+
+        // Send event to Google Analytics
+        ga("send", "event", "Donation", "Complete", ga_fullName, {
+          eventValue: ga_amount,
+          eventCategory: "Donation",
+          eventLabel: ga_recurring,
+          eventAction: "Complete",
+        });
+      });
+
+      FundraiseUp.on("checkoutOpen", function (details) {
+        var ga_checkoutDetails = details;
+
+        // Send event to Google Analytics
+        ga(
+          "send",
+          "event",
+          "Checkout",
+          "Open",
+          JSON.stringify(ga_checkoutDetails),
+          {
+            eventCategory: "Checkout",
+            eventAction: "Open",
+          }
+        );
+      });
+    </script>
+    <script>
       window.fundraiseup_livemode = false;
     </script>
   </head>
@@ -78,22 +114,5 @@
     </div>
 
     <a href="#XJKDHSTQ" style="display: none"></a>
-
-    <!-- Google Analytics Integration -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=433030882"
-    ></script>
-    <script>
-      // Initialize Google Analytics
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      // Set your Google Analytics tracking ID
-      gtag("config", "G-R7E7EM3JQB");
-    </script>
   </body>
 </html>

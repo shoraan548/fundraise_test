@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Google Tag Manager -->
     <script>
       (function (w, d, s, l, i) {
@@ -76,47 +77,7 @@
 
       gtag("config", "G-R7E7EM3JQB");
     </script>
-    <script>
-      FundraiseUp.on("donationComplete", function (details) {
-        if (details && details.donation) {
-          var ga_amount = details.donation.amount || 0;
-          var ga_recurring = details.donation.recurring || "Not Provided";
-          var ga_currency = details.donation.currency || "USD";
-          // ... similar logic for other details
 
-          // Send event to Google Analytics with separate parameters
-          ga("send", "event", "Donation", "Complete", {
-            eventValue: ga_amount,
-            eventCategory: "Donation",
-            eventLabel: ga_recurring,
-            // ... add other parameters here
-          });
-        } else {
-          console.error(
-            "Error: Missing data from FundraiseUp donationComplete event"
-          );
-        }
-      });
-    </script>
-
-    <script>
-      FundraiseUp.on("checkoutOpen", function (details) {
-        if (details) {
-          var ga_checkoutDetails = details;
-
-          // Send event to Google Analytics
-          ga("send", "event", "Checkout", "Open", {
-            eventCategory: "Checkout",
-            eventAction: "Open",
-            // Consider sending specific details from ga_checkoutDetails as custom dimensions
-          });
-        } else {
-          console.error(
-            "Error: Missing data from FundraiseUp checkoutOpen event"
-          );
-        }
-      });
-    </script>
     <script>
       window.fundraiseup_livemode = false;
     </script>
